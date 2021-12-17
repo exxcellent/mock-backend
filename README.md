@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/exxcellent/swt2-bsa-backend.svg?branch=master)](https://travis-ci.org/exxcellent/swt2-bsa-backend)
-[![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=de.bogenliga.application&metric=alert_status)](https://sonarcloud.io/dashboard?id=de.bogenliga.application)
-[![sonarcloud_cov](https://sonarcloud.io/api/project_badges/measure?project=de.bogenliga.application&metric=coverage)](https://sonarcloud.io/dashboard?id=de.bogenliga.application)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=exxcellent_swt2-bsa-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=exxcellent_swt2-bsa-backend)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=exxcellent_swt2-bsa-backend&metric=coverage)](https://sonarcloud.io/dashboard?id=exxcellent_swt2-bsa-backend)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=exxcellent_swt2-bsa-backend&metric=code_smells)](https://sonarcloud.io/dashboard?id=exxcellent_swt2-bsa-backend)
 
 
 # Bogenliga Application
@@ -34,3 +34,4 @@ Use ```mvnw``` instead of ```mvn``` commands.
 - https://flywaydb.org/documentation/migrations
 - https://flywaydb.org/documentation/maven/
 - https://flywaydb.org/documentation/command/migrate
+-

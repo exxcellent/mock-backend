@@ -3,16 +3,9 @@ package de.bogenliga.application.services.v1.competitionclass.service;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import de.bogenliga.application.business.competitionclass.api.CompetitionClassComponent;
 import de.bogenliga.application.business.competitionclass.api.types.CompetitionClassDO;
 import de.bogenliga.application.common.service.ServiceFacade;
@@ -41,9 +34,9 @@ public class CompetitionClassService implements ServiceFacade {
     private static final String PRECONDITION_MSG_NAME = "The CompetitionClass must be given a name";
 
 
-    private final Logger LOGGER = LoggerFactory.getLogger(CompetitionClassService.class);
 
     private final CompetitionClassComponent competitionClassComponent;
+
 
 
     /**
@@ -62,8 +55,7 @@ public class CompetitionClassService implements ServiceFacade {
      *
      * @return lost of {@link CompetitionClassDTO} as JSON
      */
-    @RequestMapping(method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @RequiresPermission(UserPermission.CAN_READ_SYSTEMDATEN)
     public List<CompetitionClassDTO> findAll() {
         final List<CompetitionClassDO> competitionClassDOList = competitionClassComponent.findAll();
@@ -77,15 +69,12 @@ public class CompetitionClassService implements ServiceFacade {
      * @param id id of the klasse to be returned
      * @return returns a klasse
      */
-    @RequestMapping(
+    @GetMapping(
             value = "{id}",
-            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @RequiresPermission(UserPermission.CAN_READ_SYSTEMDATEN)
     public CompetitionClassDTO findById(@PathVariable("id") final long id){
         Preconditions.checkArgument(id >= 0, PRECONDITION_MSG_KLASSE_ID);
-
-        LOGGER.debug("Receive 'findById' request with ID '{}'", id);
 
         final CompetitionClassDO competitionClassDO = competitionClassComponent.findById(id);
 
@@ -96,23 +85,16 @@ public class CompetitionClassService implements ServiceFacade {
     /**
      * I persist a new CompetitionClass and return this CompetitionClass entry
      *
-     * @param competitionClassDTO
-     * @param principal
+     * @param competitionClassDTO COmpetition Data to be stored to DB
+     * @param principal user saving data
      *
      * @return list of {@link CompetitionClassDTO} as JSON
      */
-    @RequestMapping(method = RequestMethod.POST,
+    @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @RequiresPermission(UserPermission.CAN_CREATE_SYSTEMDATEN)
     public CompetitionClassDTO create(@RequestBody final CompetitionClassDTO competitionClassDTO, final Principal principal) {
-        LOGGER.debug(
-                "Receive 'create' request with klasseId '{}', klasseName '{}', klasseJahrgangMin '{}', klasseJahrgangMax '{}', klasseNr '{}' ",
-                competitionClassDTO.getId(),
-                competitionClassDTO.getKlasseName(),
-                competitionClassDTO.getKlasseJahrgangMin(),
-                competitionClassDTO.getKlasseJahrgangMax(),
-                competitionClassDTO.getKlasseNr());
 
         checkPreconditions(competitionClassDTO);
 
@@ -127,21 +109,15 @@ public class CompetitionClassService implements ServiceFacade {
 
     /**
      * I persist a newer version of the CompetitionClass in the database.
+     *
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @PutMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @RequiresPermission(UserPermission.CAN_MODIFY_SYSTEMDATEN)
     public CompetitionClassDTO update(@RequestBody final CompetitionClassDTO competitionClassDTO,
                                       final Principal principal) {
 
-        LOGGER.debug("Receive 'update' request with  id '{}', name '{}', jahrgang_Min '{}', jahrgang_Max '{}', klasseNr '{}'",
-
-                competitionClassDTO.getId(),
-                competitionClassDTO.getKlasseName(),
-                competitionClassDTO.getKlasseJahrgangMin(),
-                competitionClassDTO.getKlasseJahrgangMax(),
-                competitionClassDTO.getKlasseNr());
 
         checkPreconditions(competitionClassDTO);
 
