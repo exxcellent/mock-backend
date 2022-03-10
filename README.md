@@ -3,7 +3,7 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=exxcellent_swt2-bsa-backend&metric=code_smells)](https://sonarcloud.io/dashboard?id=exxcellent_swt2-bsa-backend)
 
 
-# Bogenliga Application
+# Bogenliga Application WS21
 
 
 ## Content
